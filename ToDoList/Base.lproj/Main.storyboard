@@ -45,7 +45,7 @@
         <!--New ToDo-->
         <scene sceneID="5g1-jy-FOd">
             <objects>
-                <tableViewController id="kPL-TZ-cmw" sceneMemberID="viewController">
+                <tableViewController id="kPL-TZ-cmw" customClass="ToDoDetailTableViewController" customModule="ToDoList" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="bPD-Rc-yQP">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -71,6 +71,9 @@
                                                     <state key="selected" image="checkmark.circle.fill" catalog="system">
                                                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="24"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="isCompleteButtonTapped:" destination="kPL-TZ-cmw" eventType="touchUpInside" id="c5H-Ov-QG0"/>
+                                                    </connections>
                                                 </button>
                                                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Remind me to..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wbu-Ec-M8Y">
                                                     <rect key="frame" x="50" y="5" width="354" height="34"/>
@@ -79,6 +82,10 @@
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="returnPressed:" destination="kPL-TZ-cmw" eventType="primaryActionTriggered" id="Lmu-nq-A1O"/>
+                                                        <action selector="textEditingChanged:" destination="kPL-TZ-cmw" eventType="editingChanged" id="3jH-Df-ayx"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -120,22 +127,25 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="216" id="1kY-nO-tSh">
-                                        <rect key="frame" x="0.0" y="172.5" width="414" height="216"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="280" id="1kY-nO-tSh">
+                                        <rect key="frame" x="0.0" y="172.5" width="414" height="280"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1kY-nO-tSh" id="k0p-0G-6b0">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="216"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="280"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="y20-Ew-kGD">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="216"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="269"/>
+                                                    <connections>
+                                                        <action selector="datePickerChanged:" destination="kPL-TZ-cmw" eventType="primaryActionTriggered" id="agU-cH-E4Z"/>
+                                                    </connections>
                                                 </datePicker>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="y20-Ew-kGD" firstAttribute="leading" secondItem="k0p-0G-6b0" secondAttribute="leading" id="9IY-03-Fp9"/>
-                                                <constraint firstAttribute="bottom" secondItem="y20-Ew-kGD" secondAttribute="bottom" id="G2O-cx-nY4"/>
-                                                <constraint firstItem="y20-Ew-kGD" firstAttribute="top" secondItem="k0p-0G-6b0" secondAttribute="top" id="Iv3-AE-fxZ"/>
-                                                <constraint firstAttribute="trailing" secondItem="y20-Ew-kGD" secondAttribute="trailing" id="llc-8Z-aLs"/>
+                                                <constraint firstAttribute="trailing" secondItem="y20-Ew-kGD" secondAttribute="trailing" id="0ma-Nj-jSb"/>
+                                                <constraint firstItem="y20-Ew-kGD" firstAttribute="leading" secondItem="k0p-0G-6b0" secondAttribute="leading" id="3y9-Xr-D3g"/>
+                                                <constraint firstItem="y20-Ew-kGD" firstAttribute="top" secondItem="k0p-0G-6b0" secondAttribute="top" id="OTX-ZM-wh7"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="y20-Ew-kGD" secondAttribute="bottom" id="mNi-Wc-YFA"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -144,7 +154,7 @@
                             <tableViewSection headerTitle="Notes" id="9wO-4d-T0f">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="200" id="No0-cK-efc">
-                                        <rect key="frame" x="0.0" y="438.5" width="414" height="200"/>
+                                        <rect key="frame" x="0.0" y="502.5" width="414" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="No0-cK-efc" id="s5H-En-Jjk">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
@@ -187,6 +197,14 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="dueDateLabel" destination="6CL-M7-a0N" id="Yyq-WK-9op"/>
+                        <outlet property="dueDatePickerView" destination="y20-Ew-kGD" id="Rur-8N-dW2"/>
+                        <outlet property="isCompleteButton" destination="ovh-0u-SGV" id="SKi-rB-mHh"/>
+                        <outlet property="notesTextView" destination="svA-Gb-sMm" id="id6-wN-pYQ"/>
+                        <outlet property="saveButton" destination="GVE-dN-6xT" id="4dT-wk-FG9"/>
+                        <outlet property="titleTextField" destination="Wbu-Ec-M8Y" id="UMb-Ak-ROy"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AD1-HO-ZGA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="sly-z5-eNa" userLabel="Exit" sceneMemberID="exit"/>
