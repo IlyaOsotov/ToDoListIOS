@@ -41,13 +41,30 @@ class ToDoTableViewController: UITableViewController {
         let sourceViewController = segue.source as! ToDoDetailTableViewController
         
         if let todo = sourceViewController.todo {
-            let newIndexPath = IndexPath(row: todos.count, section: 0)
-            
-            todos.append(todo)
-            tableView.insertRows(at: [newIndexPath], with: .automatic)
+            if let indexOfCurrentToDo = todos.firstIndex(of: todo) {
+                todos[indexOfCurrentToDo] = todo
+                tableView.reloadRows(at: [IndexPath(row: indexOfCurrentToDo, section: 0)], with: .automatic)
+            } else {
+                let newIndexPath = IndexPath(row: todos.count, section: 0)
+                
+                todos.append(todo)
+                tableView.insertRows(at: [newIndexPath], with: .automatic)
+            }
         }
     }
-    
+
+    @IBSegueAction func editToDo(_ coder: NSCoder, sender: Any?) -> ToDoDetailTableViewController? {
+        guard let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) else {
+            return nil
+        }
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let detailController = ToDoDetailTableViewController(coder: coder)
+        detailController?.todo = todos[indexPath.row]
+                
+        return detailController
+    }
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return todos.count

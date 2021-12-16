@@ -19,12 +19,25 @@ class ToDoDetailTableViewController: UITableViewController {
     let dateLabelIndexPath = IndexPath(row: 0, section: 1)
     let datePickerIndexPath = IndexPath(row: 1, section: 1)
     let notesIndexPath = IndexPath(row: 0, section: 2)
+    var currentId: UUID?
     
     var todo: ToDo?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let todo = todo {
+            navigationItem.title = "To-Do"
+            titleTextField.text = todo.title
+            isCompleteButton.isSelected = todo.isComplete
+            dueDatePickerView.date = todo.dueDate
+            notesTextView.text = todo.notes
+            currentId = todo.id
+        } else {
+            dueDatePickerView.date = Date().addingTimeInterval(24*60*60)
+        }
+        
+        updateDueDateLabel(date: dueDatePickerView.date)
         updateSaveButtonState()
     }
     
@@ -87,7 +100,14 @@ class ToDoDetailTableViewController: UITableViewController {
         let dueDate = dueDatePickerView.date
         let notes = notesTextView.text
         
-        todo = ToDo(title: title, isComplete: isComplete, dueDate: dueDate, notes: notes)
+        if todo != nil {
+            todo?.title = title
+            todo?.isComplete = isComplete
+            todo?.dueDate = dueDate
+            todo?.notes = notes
+        } else {
+            todo = ToDo(title: title, isComplete: isComplete, dueDate: dueDate, notes: notes)
+        }
     }
 
 }
