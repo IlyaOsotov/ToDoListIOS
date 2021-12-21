@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ToDoTableViewController: UITableViewController {
+class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
     
     var todos = [ToDo]()
 
@@ -26,6 +26,15 @@ class ToDoTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    func checkmarkTapped(sender: ToDoCell) {
+        if let indexPath = tableView.indexPath(for: sender) {
+            var todo = todos[indexPath.row]
+            todo.isComplete.toggle()
+            todos[indexPath.row] = todo
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+        }
     }
 
     // MARK: - Table view data source
@@ -72,10 +81,13 @@ class ToDoTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoCellIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoCellIdentifier", for: indexPath) as! ToDoCell
+        
+        cell.delegate = self
 
         let todo = todos[indexPath.row]
-        cell.textLabel?.text = todo.title
+        cell.titleLabel?.text = todo.title
+        cell.isCompleteButtom.isSelected = todo.isComplete
 
         return cell
     }

@@ -16,14 +16,46 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ToDoCellIdentifier" id="O88-7g-Tn2">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ToDoCellIdentifier" id="O88-7g-Tn2" customClass="ToDoCell" customModule="ToDoList" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="O88-7g-Tn2" id="Qru-b2-0Tn">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I5A-W2-3te">
+                                            <rect key="frame" x="8" y="8.5" width="30" height="27"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="30" id="2Hb-6W-iJu"/>
+                                            </constraints>
+                                            <state key="normal" image="circle" catalog="system">
+                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="24"/>
+                                            </state>
+                                            <state key="selected" image="checkmark.circle.fill" catalog="system">
+                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="24"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="buttonTapped:" destination="O88-7g-Tn2" eventType="touchUpInside" id="O42-Tl-0He"/>
+                                                <action selector="isCompleteButtonTapped:" destination="kPL-TZ-cmw" eventType="touchUpInside" id="TZL-18-dIm"/>
+                                            </connections>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="puB-pE-6lk">
+                                            <rect key="frame" x="46" y="11.5" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="I5A-W2-3te" firstAttribute="centerY" secondItem="Qru-b2-0Tn" secondAttribute="centerY" id="H30-P9-LJp"/>
+                                        <constraint firstItem="puB-pE-6lk" firstAttribute="centerY" secondItem="Qru-b2-0Tn" secondAttribute="centerY" id="Hmx-Ax-J7r"/>
+                                        <constraint firstItem="puB-pE-6lk" firstAttribute="leading" secondItem="I5A-W2-3te" secondAttribute="trailing" constant="8" id="Im1-8V-zDD"/>
+                                        <constraint firstItem="I5A-W2-3te" firstAttribute="leading" secondItem="Qru-b2-0Tn" secondAttribute="leading" constant="8" id="qxe-K2-sIY"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="isCompleteButtom" destination="I5A-W2-3te" id="QWW-bz-E55"/>
+                                    <outlet property="titleLabel" destination="puB-pE-6lk" id="LpN-v7-ryf"/>
                                     <segue destination="eFg-mr-suC" kind="presentation" id="vtK-dY-vLl"/>
                                 </connections>
                             </tableViewCell>
